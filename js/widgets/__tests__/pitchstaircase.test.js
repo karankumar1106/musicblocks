@@ -1045,5 +1045,34 @@ describe("PitchStaircase Widget", () => {
             ];
             expect(() => psc._makeStairs()).not.toThrow();
         });
+
+        test("should define MIN_FREQUENCY and MAX_FREQUENCY constants", () => {
+            expect(PitchStaircase.MIN_FREQUENCY).toBe(20.0);
+            expect(PitchStaircase.MAX_FREQUENCY).toBe(20000.0);
+        });
+
+        test("_dissectStair should reject frequencies outside audible range (20 Hz - 20000 Hz)", () => {
+            const mockTextMsg = jest.fn();
+            psc.activity = { textMsg: mockTextMsg };
+            psc._musicRatio1 = { value: "100" };
+            psc._musicRatio2 = { value: "1" };
+            psc.Stairs = [["A", "4", 15000.0, 1, 1, 15000.0, 4]];
+            psc._pscTable = document.createElement("table");
+
+            const mockEvent = {
+                target: {
+                    getAttribute: jest.fn().mockReturnValue("15000.0")
+                }
+            };
+
+            // 15000 / (1/100) = 1,500,000 Hz > 20000 Hz
+            psc._dissectStair(mockEvent);
+
+            expect(mockTextMsg).toHaveBeenCalledWith(
+                "Frequency is outside audible range (20 Hz - 20000 Hz).",
+                2000
+            );
+            expect(psc.Stairs.length).toBe(1);
+        });
     });
 });
