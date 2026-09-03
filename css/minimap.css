@@ -5,7 +5,7 @@
 
 #minimap-container {
     position: fixed;
-    bottom: 20px;
+    bottom: 72px;
     right: 20px;
     z-index: 900;
     font-family: var(--font-family-system, system-ui, sans-serif);
