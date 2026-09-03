@@ -39,6 +39,7 @@ try {
    setupHelpController,
    setupBlockScaleController,
    setupContextMenuController,
+   setupMinimapController,
    setupActivityAbcParser, setupActivityIdleWatcher,
    COLLAPSEBLOCKSBUTTON, COLLAPSEBUTTON, createDefaultStack,
    createHelpContent, createjs, DATAOBJS, DEFAULTBLOCKSCALE,
@@ -151,6 +152,7 @@ let MYDEFINES = [
     "activity/help-controller",
     "activity/block-scale-controller",
     "activity/context-menu-controller",
+    "activity/minimap-controller",
     "search-ui",
     "activity/keyboard-controller",
     "widgets/plugin-dialog",
@@ -473,6 +475,9 @@ class Activity {
         setupSelectionController(this);
         setupBlockScaleController(this);
         setupContextMenuController(this);
+        if (typeof setupMinimapController === "function") {
+            setupMinimapController(this);
+        }
         this.pluginDialog = new PluginDialog({
             onLoadBuiltIn: name => this._loadBuiltInPlugin(name),
             onDelete: () => this._deletePlugin(),
@@ -2151,6 +2156,9 @@ class Activity {
             if (this._suppressRefresh) return;
             this.stageDirty = true;
             this.update = true;
+            if (this.minimapController) {
+                this.minimapController.scheduleUpdate();
+            }
             this._startRenderLoop();
         };
 

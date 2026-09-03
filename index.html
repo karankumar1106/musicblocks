@@ -85,6 +85,15 @@
         />
         <link
             rel="preload"
+            href="css/minimap.css"
+            as="style"
+            onload="
+                this.onload = null;
+                this.rel = 'stylesheet';
+            "
+        />
+        <link
+            rel="preload"
             href="css/svgAssetSelector.css"
             as="style"
             onload="

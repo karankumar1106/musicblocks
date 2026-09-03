@@ -1,0 +1,199 @@
+/**
+ * MusicBlocks Canvas Mini-Map (Radar Navigator)
+ * Styles for floating mini-map canvas, viewfinder, and controls.
+ */
+
+#minimap-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 900;
+    font-family: var(--font-family-system, system-ui, sans-serif);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+/* Floating pill button when collapsed */
+.minimap-pill-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background-color: var(--color-bg-primary, #ffffff);
+    color: var(--color-text-primary, #1f2937);
+    border: 1px solid var(--color-border-primary, #d1d5db);
+    border-radius: var(--radius-full, 9999px);
+    box-shadow: var(--shadow-md, 0 4px 6px -1px rgba(0, 0, 0, 0.1));
+    font-size: var(--font-size-xs, 12px);
+    font-weight: var(--font-weight-semibold, 600);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+.minimap-pill-btn:hover {
+    background-color: var(--color-bg-secondary, #f3f4f6);
+    border-color: var(--color-brand-primary, #3b82f6);
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.15));
+}
+
+.minimap-pill-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus, 0 0 0 3px rgba(59, 130, 246, 0.5));
+}
+
+.minimap-pill-icon {
+    font-size: 16px;
+    line-height: 1;
+}
+
+/* Expanded Navigator Card */
+.minimap-card {
+    display: flex;
+    flex-direction: column;
+    width: 210px;
+    background-color: var(--color-bg-primary, #ffffff);
+    border: 1px solid var(--color-border-primary, #d1d5db);
+    border-radius: var(--radius-lg, 8px);
+    box-shadow: var(--shadow-lg, 0 10px 15px -3px rgba(0, 0, 0, 0.15));
+    overflow: hidden;
+    animation: minimapFadeIn 0.15s ease-out;
+}
+
+@keyframes minimapFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(4px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Header toolbar */
+.minimap-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 10px;
+    background-color: var(--color-bg-secondary, #f3f4f6);
+    border-bottom: 1px solid var(--color-border-secondary, #e5e7eb);
+}
+
+.minimap-title {
+    font-size: 11px;
+    font-weight: var(--font-weight-bold, 700);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--color-text-secondary, #4b5563);
+}
+
+.minimap-controls {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.minimap-action-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 22px;
+    height: 22px;
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-sm, 4px);
+    color: var(--color-text-secondary, #4b5563);
+    cursor: pointer;
+    font-size: 12px;
+    line-height: 1;
+    padding: 0;
+    transition: background-color 0.15s, color 0.15s;
+}
+
+.minimap-action-btn:hover {
+    background-color: var(--color-bg-tertiary, #e5e7eb);
+    color: var(--color-text-primary, #1f2937);
+}
+
+.minimap-action-btn:focus-visible {
+    outline: none;
+    box-shadow: var(--shadow-focus, 0 0 0 2px rgba(59, 130, 246, 0.5));
+}
+
+/* Interactive Canvas container */
+.minimap-canvas-wrapper {
+    position: relative;
+    width: 210px;
+    height: 135px;
+    background-color: var(--color-bg-tertiary, #f0f2f5);
+    cursor: crosshair;
+}
+
+.minimap-canvas {
+    display: block;
+    width: 210px;
+    height: 135px;
+}
+
+/* Empty state message */
+.minimap-empty-hint {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 11px;
+    color: var(--color-text-tertiary, #9ca3af);
+    padding: 10px;
+    pointer-events: none;
+}
+
+/* Dark Mode Overrides */
+body.dark .minimap-card {
+    background-color: var(--color-bg-primary, #111827);
+    border-color: var(--color-border-primary, #4b5563);
+}
+
+body.dark .minimap-header {
+    background-color: var(--color-bg-secondary, #1f2937);
+    border-color: var(--color-border-secondary, #374151);
+}
+
+body.dark .minimap-canvas-wrapper {
+    background-color: #0b0f19;
+}
+
+body.dark .minimap-pill-btn {
+    background-color: var(--color-bg-secondary, #1f2937);
+    border-color: var(--color-border-primary, #4b5563);
+    color: var(--color-text-primary, #f9fafb);
+}
+
+body.dark .minimap-pill-btn:hover {
+    background-color: var(--color-bg-tertiary, #374151);
+}
+
+/* High Contrast Mode Overrides */
+body.highcontrast .minimap-card,
+body.highcontrast .minimap-pill-btn {
+    background-color: #000000 !important;
+    border: 2px solid #ffffff !important;
+    color: #ffffff !important;
+}
+
+body.highcontrast .minimap-header {
+    background-color: #000000 !important;
+    border-bottom: 2px solid #ffffff !important;
+}
+
+body.highcontrast .minimap-title,
+body.highcontrast .minimap-action-btn {
+    color: #ffff00 !important;
+}
+
+body.highcontrast .minimap-canvas-wrapper {
+    background-color: #000000 !important;
+}

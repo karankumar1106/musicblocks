@@ -201,7 +201,8 @@ requirejs.config({
                 "activity/selection-controller",
                 "activity/trash-controller",
                 "activity/help-controller",
-                "activity/context-menu-controller"
+                "activity/context-menu-controller",
+                "activity/minimap-controller"
             ],
             exports: "Activity"
         },
@@ -251,6 +252,7 @@ requirejs.config({
         "activity/trash-controller": "js/activity/trash-controller",
         "activity/help-controller": "js/activity/help-controller",
         "activity/context-menu-controller": "js/activity/context-menu-controller",
+        "activity/minimap-controller": "js/activity/minimap-controller",
         "search-ui": "js/search-ui",
         "project-manager": "js/project-manager",
         "activity/keyboard-controller": "js/activity/keyboard-controller",
